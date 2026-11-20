@@ -541,7 +541,10 @@
   </footer>
 
   <script>
-    const TILE_SIZE = 25;
+    function getTileSize() {
+      const val = getComputedStyle(document.documentElement).getPropertyValue('--tile-size').trim();
+      return parseFloat(val) || 25;
+    }
     let currentLane = 'left';
     let currentEnemy = 'hog';
     let currentSpawnPos = 'outer';
@@ -680,6 +683,7 @@
     }
 
     function updateView() {
+      const tileSize = getTileSize();
       const defMarker = document.getElementById('defenseMarker');
       const defImg = document.getElementById('defenseImg');
       const enemyMarker = document.getElementById('enemyMarker');
@@ -761,23 +765,23 @@
         }
       }
 
-      defMarker.style.width = `${def.size * TILE_SIZE}px`;
-      defMarker.style.height = `${def.size * TILE_SIZE}px`;
+      defMarker.style.width = `${def.size * tileSize}px`;
+      defMarker.style.height = `${def.size * tileSize}px`;
 
-      defMarker.style.left = `${col * TILE_SIZE}px`;
-      defMarker.style.top = `${row * TILE_SIZE}px`;
+      defMarker.style.left = `${col * tileSize}px`;
+      defMarker.style.top = `${row * tileSize}px`;
       defImg.src = def.img;
 
       if (def.range > 0) {
         rangeCircle.style.display = 'block';
         const diameterTiles = def.range * 2;
-        rangeCircle.style.width = `${diameterTiles * TILE_SIZE}px`;
-        rangeCircle.style.height = `${diameterTiles * TILE_SIZE}px`;
+        rangeCircle.style.width = `${diameterTiles * tileSize}px`;
+        rangeCircle.style.height = `${diameterTiles * tileSize}px`;
 
         const centerOffsetX = (col + def.size / 2) - def.range;
         const centerOffsetY = (row + def.size / 2) - def.range;
-        rangeCircle.style.left = `${centerOffsetX * TILE_SIZE}px`;
-        rangeCircle.style.top = `${centerOffsetY * TILE_SIZE}px`;
+        rangeCircle.style.left = `${centerOffsetX * tileSize}px`;
+        rangeCircle.style.top = `${centerOffsetY * tileSize}px`;
       } else {
         rangeCircle.style.display = 'none';
       }
@@ -798,8 +802,8 @@
         enemyCol = (currentLane === 'left') ? 2.9 : 12.9;
       }
 
-      enemyMarker.style.left = `${enemyCol * TILE_SIZE}px`;
-      enemyMarker.style.top = `${enemyRow * TILE_SIZE}px`;
+      enemyMarker.style.left = `${enemyCol * tileSize}px`;
+      enemyMarker.style.top = `${enemyRow * tileSize}px`;
       enemyImg.src = enemy.img;
 
       const laneName = (currentLane === 'left') ? 'Left Lane' : 'Right Lane';
