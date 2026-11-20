@@ -8,6 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lilita+One&display=swap" rel="stylesheet">
 
   <style>
+    /* 敵から防衛施設への誘導ルート（点線） */
+    .agro-line-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9;
+    }
+    .agro-line {
+      stroke: #fb7185;
+      stroke-width: 3;
+      stroke-dasharray: 6 6;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 6px rgba(244, 63, 94, 0.85));
+      animation: dashMove 0.8s linear infinite;
+    }
+    @keyframes dashMove {
+      to {
+        stroke-dashoffset: -12;
+      }
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -384,6 +407,24 @@
         height: 34px;
       }
     }
+    /* 防衛建物の配置名バッジ（4-4, 4-3など） */
+    .plant-badge {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #fde047;
+      border: 1px solid #f59e0b;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -520,6 +561,15 @@
         <div class="tower friendly pt f-pt-right">Tower</div>
         <div class="tower friendly kt f-kt">King</div>
 
+        <!-- 誘導ルート描画レイヤー -->
+        <svg class="agro-line-layer" id="agroLayer">
+          <defs>
+            <marker id="agroArrow" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+              <path d="M 0 0 L 6 3 L 0 6 z" fill="#fb7185" />
+            </marker>
+          </defs>
+          <line id="agroLine" class="agro-line" x1="0" y1="0" x2="0" y2="0" marker-end="url(#agroArrow)" />
+        </svg>
         <!-- 敵の進軍マーカー -->
         <div class="enemy-indicator" id="enemyMarker">
           <img id="enemyImg" src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png" alt="Enemy">
@@ -530,6 +580,7 @@
 
         <!-- 防衛カード配置マーカー -->
         <div class="defense-placement" id="defenseMarker">
+          <span class="plant-badge" id="plantBadge">4-4</span>
           <img id="defenseImg" src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/cannon.png" alt="Defense">
         </div>
       </div>
@@ -812,6 +863,40 @@
       <strong>${def.name} (${def.size}x${def.size})</strong>
       ${def.desc}<br><br>
       Positioning tailored for <strong>${enemy.name}</strong>.`;
+      // 配置名バッジの自動判定・表示
+      const plantBadge = document.getElementById('plantBadge');
+      if (plantBadge) {
+        let label = '4-4';
+        if (currentDef === 'tesla' && col === 8) {
+          label = 'Center';
+        } else if (row === 19) {
+          label = 'Bridge / Front';
+        } else if (
+          (currentLane === 'left' && col === 6) ||
+          (currentLane === 'right' && (col === 9 || col === 10))
+        ) {
+          label = '4-3';
+        } else if (
+          (currentLane === 'left' && col === 8) ||
+          (currentLane === 'right' && col === 7)
+        ) {
+          label = '4-4 (Opp)';
+        }
+        plantBadge.textContent = label;
+      }
+      // 誘導ルート点線の座標計算（敵の中心 -> 防衛建物の中心）
+      const agroLine = document.getElementById('agroLine');
+      if (agroLine) {
+        const startX = (enemyCol + 1.1) * tileSize;
+        const startY = (enemyRow + 1.1) * tileSize;
+        const endX = (col + def.size / 2) * tileSize;
+        const endY = (row + def.size / 2) * tileSize;
+
+        agroLine.setAttribute('x1', startX);
+        agroLine.setAttribute('y1', startY);
+        agroLine.setAttribute('x2', endX);
+        agroLine.setAttribute('y2', endY);
+      }
     }
 
     function setLane(lane) {
