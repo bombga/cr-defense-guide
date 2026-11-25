@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clash Royale Defense Guide</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lilita+One&display=swap"
+    rel="stylesheet">
 
   <style>
     /* 敵から防衛施設への誘導ルート（点線） */
@@ -18,6 +20,7 @@
       pointer-events: none;
       z-index: 9;
     }
+
     .agro-line {
       stroke: #fb7185;
       stroke-width: 3;
@@ -26,19 +29,22 @@
       filter: drop-shadow(0 0 6px rgba(244, 63, 94, 0.85));
       animation: dashMove 0.8s linear infinite;
     }
+
     @keyframes dashMove {
       to {
         stroke-dashoffset: -12;
       }
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       background-color: #0c101a;
-      background-image: 
+      background-image:
         radial-gradient(circle at 50% 20%, rgba(30, 58, 138, 0.28), transparent 70%),
         radial-gradient(circle at 10% 80%, rgba(15, 23, 42, 0.8), transparent 50%),
         radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
@@ -58,14 +64,16 @@
       text-align: center;
       margin-bottom: 14px;
     }
+
     h1 {
       font-family: 'Lilita One', cursive;
       font-size: 2.2rem;
       letter-spacing: 1px;
       color: #f8fafc;
-      text-shadow: 0 4px 14px rgba(0,0,0,0.8), 0 0 20px rgba(56, 189, 248, 0.25);
+      text-shadow: 0 4px 14px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.25);
       margin-bottom: 2px;
     }
+
     .subtitle {
       color: #8da2b5;
       font-size: 0.92rem;
@@ -91,7 +99,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
     }
 
     .control-group label {
@@ -109,10 +117,12 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
     }
+
     .card-slots.defense-grid {
       grid-template-columns: repeat(5, 1fr);
       gap: 6px;
     }
+
     .card-btn {
       background: #111827;
       border: 2px solid #1f293d;
@@ -129,22 +139,26 @@
       gap: 2px;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .card-btn:hover {
       border-color: #475569;
       transform: translateY(-2px);
     }
+
     .card-btn.active {
       background: linear-gradient(180deg, #1e3a8a 0%, #172554 100%);
       border-color: #38bdf8;
       color: #fff;
       box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
     }
+
     .card-btn img {
       width: 30px;
       height: 38px;
       object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
     }
+
     .card-btn .card-cost {
       font-family: 'Inter', sans-serif;
       font-size: 0.6rem;
@@ -159,6 +173,7 @@
       display: flex;
       gap: 8px;
     }
+
     .toggle-btn {
       flex: 1;
       background: #111827;
@@ -172,9 +187,11 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .toggle-btn:hover {
       border-color: #475569;
     }
+
     .toggle-btn.active {
       background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
       color: #fff;
@@ -192,6 +209,7 @@
       line-height: 1.55;
       color: #cbd5e1;
     }
+
     .info-box strong {
       font-family: 'Lilita One', cursive;
       font-size: 0.98rem;
@@ -204,12 +222,13 @@
     :root {
       --tile-size: 25px;
     }
+
     .arena-frame {
       background: #d8c39e;
       border: 5px solid #8e7855;
       border-radius: 26px;
       padding: 14px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.85), inset 0 2px 8px rgba(255,255,255,0.4);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 2px 8px rgba(255, 255, 255, 0.4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -226,7 +245,7 @@
       user-select: none;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: inset 0 0 16px rgba(0,0,0,0.4);
+      box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.4);
     }
 
     .cell {
@@ -234,34 +253,49 @@
       height: var(--tile-size);
     }
 
-    .cell.grass-a { background-color: #79bd39; }
-    .cell.grass-b { background-color: #6eae2f; }
-    .cell.enemy-side.grass-a { background-color: #72b535; }
-    .cell.enemy-side.grass-b { background-color: #67a62b; }
+    .cell.grass-a {
+      background-color: #79bd39;
+    }
+
+    .cell.grass-b {
+      background-color: #6eae2f;
+    }
+
+    .cell.enemy-side.grass-a {
+      background-color: #72b535;
+    }
+
+    .cell.enemy-side.grass-b {
+      background-color: #67a62b;
+    }
 
     .cell.blocked-wall {
       background: #a89274 !important;
       border: 1px solid #7d6b52;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
     }
 
     .cell.river {
       background: linear-gradient(180deg, #2b7bc4 0%, #1e5a96 100%);
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
     }
-    .cell.river-bank-top { border-bottom: 2px solid #558b2f; }
-    .cell.river-bank-bottom { border-top: 2px solid #558b2f; }
+
+    .cell.river-bank-top {
+      border-bottom: 2px solid #558b2f;
+    }
+
+    .cell.river-bank-bottom {
+      border-top: 2px solid #558b2f;
+    }
 
     .cell.bridge {
-      background: repeating-linear-gradient(
-        0deg,
-        #b48a56,
-        #b48a56 4px,
-        #8d6537 6px
-      ) !important;
+      background: repeating-linear-gradient(0deg,
+          #b48a56,
+          #b48a56 4px,
+          #8d6537 6px) !important;
       border-left: 2px solid #5e4324;
       border-right: 2px solid #5e4324;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
       z-index: 2;
     }
 
@@ -281,34 +315,60 @@
       letter-spacing: 0.5px;
       color: #fff;
       pointer-events: none;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.45);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
       z-index: 5;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
+
     .pt {
       width: calc(var(--tile-size) * 3);
       height: calc(var(--tile-size) * 3);
     }
+
     .kt {
       width: calc(var(--tile-size) * 4);
       height: calc(var(--tile-size) * 4);
     }
+
     .tower.friendly {
       background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
       border: 2px solid #93c5fd;
     }
+
     .tower.enemy {
       background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
       border: 2px solid #fca5a5;
     }
 
-    .e-pt-left  { left: calc(var(--tile-size) * 2);  top: calc(var(--tile-size) * 5); }
-    .e-pt-right { left: calc(var(--tile-size) * 13); top: calc(var(--tile-size) * 5); }
-    .e-kt       { left: calc(var(--tile-size) * 7);  top: calc(var(--tile-size) * 1); }
+    .e-pt-left {
+      left: calc(var(--tile-size) * 2);
+      top: calc(var(--tile-size) * 5);
+    }
 
-    .f-pt-left  { left: calc(var(--tile-size) * 2);  top: calc(var(--tile-size) * 24); }
-    .f-pt-right { left: calc(var(--tile-size) * 13); top: calc(var(--tile-size) * 24); }
-    .f-kt       { left: calc(var(--tile-size) * 7);  top: calc(var(--tile-size) * 27); }
+    .e-pt-right {
+      left: calc(var(--tile-size) * 13);
+      top: calc(var(--tile-size) * 5);
+    }
+
+    .e-kt {
+      left: calc(var(--tile-size) * 7);
+      top: calc(var(--tile-size) * 1);
+    }
+
+    .f-pt-left {
+      left: calc(var(--tile-size) * 2);
+      top: calc(var(--tile-size) * 24);
+    }
+
+    .f-pt-right {
+      left: calc(var(--tile-size) * 13);
+      top: calc(var(--tile-size) * 24);
+    }
+
+    .f-kt {
+      left: calc(var(--tile-size) * 7);
+      top: calc(var(--tile-size) * 27);
+    }
 
     .range-circle {
       position: absolute;
@@ -329,15 +389,16 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.8), inset 0 2px 4px rgba(255,255,255,0.4);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.4);
       z-index: 10;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .defense-placement img {
       width: 80%;
       height: 80%;
       object-fit: contain;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
     }
 
     .enemy-indicator {
@@ -355,6 +416,7 @@
       overflow: hidden;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .enemy-indicator img {
       width: 38px;
       height: 46px;
@@ -370,16 +432,19 @@
       max-width: 800px;
       line-height: 1.5;
     }
+
     footer a {
       color: #94a3b8;
       text-decoration: underline;
     }
+
     /* スマホ・タブレット画面用のレスポンシブ調整 */
     @media (max-width: 900px) {
       .main-container {
         flex-direction: column-reverse;
         gap: 20px;
       }
+
       .controls-panel {
         width: 100%;
         max-width: 460px;
@@ -391,22 +456,27 @@
       :root {
         --tile-size: 18px;
       }
+
       h1 {
         font-size: 1.6rem;
       }
+
       .arena-frame {
         padding: 8px;
         border-width: 3px;
         border-radius: 18px;
       }
+
       .tower {
         font-size: 0.65rem;
       }
+
       .enemy-indicator img {
         width: 28px;
         height: 34px;
       }
     }
+
     /* 防衛建物の配置名バッジ（4-4, 4-3など） */
     .plant-badge {
       position: absolute;
@@ -427,6 +497,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -441,12 +512,14 @@
         <label>Enemy Win Condition</label>
         <div class="card-slots" id="enemySlots">
           <button type="button" class="card-btn active" data-card="hog" onclick="setEnemy('hog')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png" alt="Hog Rider">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png"
+              alt="Hog Rider">
             <span>Hog</span>
             <span class="card-cost">4</span>
           </button>
           <button type="button" class="card-btn" data-card="battle_ram" onclick="setEnemy('battle_ram')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/battle-ram.png" alt="Battle Ram">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/battle-ram.png"
+              alt="Battle Ram">
             <span>Ram</span>
             <span class="card-cost">4</span>
           </button>
@@ -461,7 +534,8 @@
             <span class="card-cost">8</span>
           </button>
           <button type="button" class="card-btn" data-card="skel_barrel" onclick="setEnemy('skel_barrel')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-barrel.png" alt="Skeleton Barrel">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-barrel.png"
+              alt="Skeleton Barrel">
             <span>S. Barrel</span>
             <span class="card-cost">3</span>
           </button>
@@ -476,17 +550,20 @@
             <span class="card-cost">4</span>
           </button>
           <button type="button" class="card-btn" data-card="elixir_golem" onclick="setEnemy('elixir_golem')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/elixir-golem.png" alt="Elixir Golem">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/elixir-golem.png"
+              alt="Elixir Golem">
             <span>E-Golem</span>
             <span class="card-cost">3</span>
           </button>
           <button type="button" class="card-btn" data-card="goblin_giant" onclick="setEnemy('goblin_giant')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-giant.png" alt="Goblin Giant">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-giant.png"
+              alt="Goblin Giant">
             <span>Gob-Giant</span>
             <span class="card-cost">6</span>
           </button>
           <button type="button" class="card-btn" data-card="electro_giant" onclick="setEnemy('electro_giant')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-giant.png" alt="Electro Giant">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-giant.png"
+              alt="Electro Giant">
             <span>E-Giant</span>
             <span class="card-cost">7</span>
           </button>
@@ -506,7 +583,8 @@
       <div class="control-group" id="spawnGroup">
         <label>Enemy Spawn Position (Air / Path)</label>
         <div class="toggle-group">
-          <button type="button" class="toggle-btn active" id="btnOuter" onclick="setSpawnPos('outer')">Outer Edge</button>
+          <button type="button" class="toggle-btn active" id="btnOuter" onclick="setSpawnPos('outer')">Outer
+            Edge</button>
           <button type="button" class="toggle-btn" id="btnInner" onclick="setSpawnPos('inner')">Inner Tile</button>
         </div>
       </div>
@@ -526,19 +604,28 @@
             <span class="card-cost">4 Elixir</span>
           </button>
           <button type="button" class="card-btn" data-card="bomb_tower" onclick="setDefense('bomb_tower')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bomb-tower.png" alt="Bomb Tower">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bomb-tower.png"
+              alt="Bomb Tower">
             <span>Bomb Twr</span>
             <span class="card-cost">4 Elixir</span>
           </button>
           <button type="button" class="card-btn" data-card="inferno" onclick="setDefense('inferno')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/inferno-tower.png" alt="Inferno Tower">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/inferno-tower.png"
+              alt="Inferno Tower">
             <span>Inferno</span>
             <span class="card-cost">5 Elixir</span>
           </button>
           <button type="button" class="card-btn" data-card="goblin_cage" onclick="setDefense('goblin_cage')">
-            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-cage.png" alt="Goblin Cage">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-cage.png"
+              alt="Goblin Cage">
             <span>Gob Cage</span>
             <span class="card-cost">4 Elixir</span>
+          </button>
+          <button type="button" class="card-btn" data-card="tombstone" onclick="setDefense('tombstone')">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/tombstone.png"
+              alt="Tombstone">
+            <span>Tombstone</span>
+            <span class="card-cost">3 Elixir</span>
           </button>
         </div>
       </div>
@@ -572,7 +659,8 @@
         </svg>
         <!-- 敵の進軍マーカー -->
         <div class="enemy-indicator" id="enemyMarker">
-          <img id="enemyImg" src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png" alt="Enemy">
+          <img id="enemyImg" src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png"
+            alt="Enemy">
         </div>
 
         <!-- 施設の射程サークル -->
@@ -581,14 +669,17 @@
         <!-- 防衛カード配置マーカー -->
         <div class="defense-placement" id="defenseMarker">
           <span class="plant-badge" id="plantBadge">4-4</span>
-          <img id="defenseImg" src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/cannon.png" alt="Defense">
+          <img id="defenseImg" src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/cannon.png"
+            alt="Defense">
         </div>
       </div>
     </div>
   </div>
 
   <footer>
-    This material is unofficial and is not endorsed by Supercell. For more information see <a href="https://www.supercell.com/fan-content-policy" target="_blank" rel="noopener">Supercell's Fan Content Policy</a>.
+    This material is unofficial and is not endorsed by Supercell. For more information see <a
+      href="https://www.supercell.com/fan-content-policy" target="_blank" rel="noopener">Supercell's Fan Content
+      Policy</a>.
   </footer>
 
   <script>
@@ -636,7 +727,14 @@
         range: 0,
         img: 'https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-cage.png',
         desc: ''
-      }
+      },
+      tombstone: {
+        name: 'Tombstone',
+        size: 3,
+        range: 0,
+        img: 'https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/tombstone.png',
+        desc: 'Spawns skeletons continuously to distract single-target win conditions.'
+      },
     };
 
     const enemyData = {
@@ -790,29 +888,39 @@
           col = (currentLane === 'left') ? 8 : 7;
           def.desc = `<strong>Lane-Biased Center Plant:</strong><br>
           Placed 4 tiles from river, offset toward the attacking lane for consistent lock-on against heavy tanks.`;
+        } else if (currentEnemy === 'skel_barrel' && currentSpawnPos === 'outer') {
+          row = 21;
+          col = (currentLane === 'left') ? 6 : 9;
+          def.desc = `<strong>Deep Pull Plant (Anti-Skeleton Barrel - Outer Edge):</strong><br>
+          Shifted 1 tile toward the ${currentLane} lane to securely agro the Skeleton Barrel spawned on the Outer Edge.`;
         } else {
-          // Battle Ram, Skeleton Barrel
+          // Battle Ram, Skeleton Barrel (Inner Tile)
           row = 21;
           col = (currentLane === 'left') ? 7 : 8;
           def.desc = `<strong>Center Kill Zone (Anti-${enemy.name}):</strong><br>
           Standard 4-4 plant. Pulls ${enemy.name} into the mutual Princess Tower crossfire zone.`;
         }
       } else {
-        // 通常3x3施設 (Cannon, Bomb Tower, Inferno)
+        // 通常3x3施設 (Cannon, Bomb Tower, Inferno, Tombstone, Goblin Hut)
         if (currentEnemy === 'minion_giant') {
           row = 21;
           col = (currentLane === 'left') ? 6 : 9;
           def.desc = `Deep 4-3 plant shifted 1 tile outward against Minion Giant. Successfully agroes from both Outer and Inner routes under dual tower DPS.`;
-        } else if (heavyTankKeys.includes(currentEnemy)) {
-          // Giant, Golem, Rune Giant, Elixir Golem, Goblin Giant, Electro Giant
+        } else if (currentEnemy === 'skel_barrel' && currentSpawnPos === 'outer' && (currentDef === 'tombstone' || currentDef === 'goblin_hut')) {
+          row = 20;
+          col = (currentLane === 'left') ? 7 : 8;
+          def.desc = `<strong>3-4 High Plant (Anti-Skeleton Barrel - Outer Edge):</strong><br>
+          Shifted 1 tile up toward the river so Outer Edge Skeleton Barrels reliably lock onto the spawner without shifting laterally.`;
+        } else if (currentEnemy === 'skel_barrel' && currentSpawnPos === 'outer') {
           row = 21;
-          col = (currentLane === 'left') ? 8 : 7;
-          def.desc = `Aggressive 4-4 plant shifted toward the incoming push lane for a quicker lock-on against ${enemy.name}.`;
+          col = (currentLane === 'left') ? 6 : 9;
+          def.desc = `<strong>4-3 Pull Plant (Anti-Skeleton Barrel - Outer Edge):</strong><br>
+          Shifted 1 tile toward the ${currentLane} lane so Outer Edge Skeleton Barrels reliably lock onto the building.`;
         } else {
-          // Hog, Battle Ram, Skeleton Barrel
+          // Hog, Battle Ram, Skeleton Barrel (Inner Tile)
           row = 21;
           col = (currentLane === 'left') ? 7 : 8;
-          def.desc = `Optimal 4-4 plant. Pulls ${enemy.name} into the center kill zone while allowing both Princess Towers to assist.`;
+          def.desc = `<strong>Optimal 4-4 plant.</strong> Pulls ${enemy.name} into the center kill zone while allowing both Princess Towers to assist.`;
         }
       }
 
@@ -863,12 +971,15 @@
       <strong>${def.name} (${def.size}x${def.size})</strong>
       ${def.desc}<br><br>
       Positioning tailored for <strong>${enemy.name}</strong>.`;
+
       // 配置名バッジの自動判定・表示
       const plantBadge = document.getElementById('plantBadge');
       if (plantBadge) {
         let label = '4-4';
         if (currentDef === 'tesla' && col === 8) {
           label = 'Center';
+        } else if (row === 20) {
+          label = '3-4';
         } else if (row === 19) {
           label = 'Bridge / Front';
         } else if (
@@ -884,6 +995,7 @@
         }
         plantBadge.textContent = label;
       }
+
       // 誘導ルート点線の座標計算（敵の中心 -> 防衛建物の中心）
       const agroLine = document.getElementById('agroLine');
       if (agroLine) {
@@ -934,4 +1046,5 @@
     updateView();
   </script>
 </body>
+
 </html>
