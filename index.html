@@ -627,6 +627,12 @@
             <span>Tombstone</span>
             <span class="card-cost">3 Elixir</span>
           </button>
+          <button type="button" class="card-btn" data-card="goblin_hut" onclick="setDefense('goblin_hut')">
+            <img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-hut.png"
+              alt="Goblin Hut">
+            <span>Gob Hut</span>
+            <span class="card-cost">5 Elixir</span>
+          </button>
         </div>
       </div>
 
@@ -734,6 +740,13 @@
         range: 0,
         img: 'https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/tombstone.png',
         desc: 'Spawns skeletons continuously to distract single-target win conditions.'
+      },
+      goblin_hut: {
+        name: 'Goblin Hut',
+        size: 3,
+        range: 0,
+        img: 'https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-hut.png',
+        desc: 'Spawns Spear Goblins continuously to chip and distract incoming win conditions.'
       },
     };
 
